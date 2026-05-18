@@ -196,6 +196,348 @@ Choisissez Attacher un volume.
 <img width="896" height="354" alt="image" src="https://github.com/user-attachments/assets/0e615308-b645-4f4f-bfc8-a3f731852149" />
 
 
+L'opération échoue comme prévu, car la clé AWS KMS utilisée pour chiffrer le volume de données est désormais désactivée et ne peut plus être utilisée pour déchiffrer les données.
+
+
+
+
+Dans le volet de navigation, sélectionnez Historique des événements.
+Conseil : pour ouvrir le volet de navigation, choisissez l'icône de menu  dans le coin supérieur gauche.
+Remarque : CloudTrail fournit un journal d'audit des appels d'API effectués sur le compte AWS. L'historique des événements permet de consulter les événements des 90 derniers jours d'activité du compte.
+
+
+Les événements récents sont affichés.
+Sélectionnez le lien correspondant à l'événement DisableKey.
+Dans la section Enregistrement d'événement, passez en revue les détails de l'événement. Vous devriez voir des informations semblables à l'enregistrement suivant :
+
+
+Enregistrement d'événement
+
+Vue JSON
+{
+    "eventVersion": "1.11",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA2NCBAL3RPBAGXM7CZ:user4632195=Mamadou__Sy",
+        "arn": "arn:aws:sts::715248393954:assumed-role/voclabs/user4632195=Mamadou__Sy",
+        "accountId": "715248393954",
+        "accessKeyId": "ASIA2NCBAL3RMAXUTZQK",
+        "sessionContext": {
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "AROA2NCBAL3RPBAGXM7CZ",
+                "arn": "arn:aws:iam::715248393954:role/voclabs",
+                "accountId": "715248393954",
+                "userName": "voclabs"
+            },
+            "attributes": {
+                "creationDate": "2026-05-18T04:14:33Z",
+                "mfaAuthenticated": "false"
+            }
+        }
+    },
+    "eventTime": "2026-05-18T05:41:19Z",
+    "eventSource": "kms.amazonaws.com",
+    "eventName": "DisableKey",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "174.89.99.59",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "requestParameters": {
+        "keyId": "55487ec5-4c6b-4c87-80e5-3cfa8bcfc271"
+    },
+    "responseElements": {
+        "keyId": "arn:aws:kms:us-east-1:715248393954:key/55487ec5-4c6b-4c87-80e5-3cfa8bcfc271"
+    },
+    "requestID": "8dbc93c3-34e9-41fc-9bb4-72d84ab8f4c2",
+    "eventID": "2f71316e-829b-4816-9202-797c00ffdf53",
+    "readOnly": false,
+    "resources": [
+        {
+            "accountId": "715248393954",
+            "type": "AWS::KMS::Key",
+            "ARN": "arn:aws:kms:us-east-1:715248393954:key/55487ec5-4c6b-4c87-80e5-3cfa8bcfc271"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "managementEvent": true,
+    "recipientAccountId": "715248393954",
+    "eventCategory": "Management",
+    "tlsDetails": {
+        "tlsVersion": "TLSv1.3",
+        "cipherSuite": "TLS_AES_256_GCM_SHA384",
+        "clientProvidedHostHeader": "kms.us-east-1.amazonaws.com",
+        "keyExchange": "X25519MLKEM768"
+    },
+    "sessionCredentialFromConsole": "true"
+}
+
+Dans la section Détails, examinez les détails de l'événement. L'heure de l'événement indique que vous avez désactivé la clé AWS KMS il y a quelques minutes.
+Vous allez ensuite examiner l'événement AttachVolume, qui s'est produit juste après l'événement DisableKey.
+
+<------------------------------>
+
+
+Dans le volet de navigation, sélectionnez Historique des événements.
+Sélectionnez le lien de l'événement AttachVolume.
+Dans la section Enregistrement d'événement, passez en revue les détails de l'événement. Vous devriez voir des informations semblables à l'enregistrement suivant 
+
+
+<------------------------------>
+
+aTTACHvOLUME
+
+{
+    "eventVersion": "1.11",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA2NCBAL3RPBAGXM7CZ:user4632195=Mamadou__Sy",
+        "arn": "arn:aws:sts::715248393954:assumed-role/voclabs/user4632195=Mamadou__Sy",
+        "accountId": "715248393954",
+        "accessKeyId": "ASIA2NCBAL3RBYRBYMJV",
+        "sessionContext": {
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "AROA2NCBAL3RPBAGXM7CZ",
+                "arn": "arn:aws:iam::715248393954:role/voclabs",
+                "accountId": "715248393954",
+                "userName": "voclabs"
+            },
+            "attributes": {
+                "creationDate": "2026-05-18T04:14:33Z",
+                "mfaAuthenticated": "false"
+            }
+        }
+    },
+    "eventTime": "2026-05-18T05:47:50Z",
+    "eventSource": "ec2.amazonaws.com",
+    "eventName": "AttachVolume",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "174.89.99.59",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "errorCode": "Client.CustomerKeyHasBeenRevoked",
+    "errorMessage": "Volume vol-0894f908458cca170 cannot be attached. The encrypted volume was unable to access the KMS key.",
+    "requestParameters": {
+        "volumeId": "vol-0894f908458cca170",
+        "instanceId": "i-0c9d812c0cfa2790f",
+        "device": "/dev/sdf",
+        "deleteOnTermination": false
+    },
+    "responseElements": null,
+    "requestID": "00c992ec-cb32-4371-9edd-48caa9eb28e5",
+    "eventID": "435a9a86-8afe-41b7-a09a-931a25287d3f",
+    "readOnly": false,
+    "eventType": "AwsApiCall",
+    "managementEvent": true,
+    "recipientAccountId": "715248393954",
+    "eventCategory": "Management",
+    "tlsDetails": {
+        "tlsVersion": "TLSv1.3",
+        "cipherSuite": "TLS_AES_128_GCM_SHA256",
+        "clientProvidedHostHeader": "ec2.us-east-1.amazonaws.com"
+    },
+    "sessionCredentialFromConsole": "true"
+}
+
+
+
+
+ Les détails indiquent que la demande d'attachement du volume à l'instance a échoué. 
+
+  En effet, le processus d'attachement du volume a remarqué que le volume de données était chiffré avec la clé MyKMSKey. Amazon EC2 a donc contacté AWS KMS pour obtenir la clé de données brute pour déchiffrer le volume. AWS KMS a refusé la demande, car la clé AWS KMS utilisée pour chiffrer la clé de données avec laquelle le volume EBS a été chiffré a été désactivée.
+
+Vous allez ensuite réactiver la clé AWS KMS et rattacher le volume EBS.
+Pour réactiver MyKMSKey, retournez à la console AWS KMS.
+Sélectionnez  MyKMSKey, puis choisissez Actions de clé > Activer.
+
+
+<img width="812" height="170" alt="image" src="https://github.com/user-attachments/assets/2838138a-9da3-4049-9f31-554b7e0da090" />
+
+
+<------------------------------>
+
+
+Pour attacher de nouveau le volume, revenez à la console Amazon EC2.
+Dans le volet de navigation, sélectionnez Volumes.
+Sélectionnez votre volume, puis choisissez Actions > Attacher un volume.
+Sur la page Attacher un volume, pour Instance, choisissez votre instance, puis Attacher un volume.
+ Le volume a été attaché avec succès.
+
+ <img width="833" height="182" alt="image" src="https://github.com/user-attachments/assets/31b95c70-01b8-4da5-8c70-e69dd5be0557" />
+
+
+
+ # Tâche 5 : analyse de l'activité d'AWS KMS à l'aide de CloudTrail
+
+Au cours de cette tâche, vous allez accéder à l'historique des événements CloudTrail pour rechercher les événements liés à vos opérations de chiffrement. La fonctionnalité de journal d'audit CloudTrail est une fonctionnalité de sécurité importante, et il est judicieux de surveiller la manière dont les clés AWS KMS sont utilisées dans votre compte.
+Tout d'abord, vous allez accéder à l'historique des événements CloudTrail.
+
+
+Accédez à la console CloudTrail. 
+
+Dans le volet de navigation, sélectionnez Historique des événements.
+Dans la liste Historique des événements, notez la colonne nommée Source de l'événement.
+Chaque fois qu'un appel d'API à un service AWS se produit dans la région que vous avez sélectionnée, l'événement et le service AWS qui l'a signalé sont répertoriés si le service signale de tels événements à CloudTrail.
+Ensuite, vous allez filtrer l'historique des événements pour afficher uniquement les événements signalés par le service AWS KMS. 
+Sous Attributs de recherche, dans la liste déroulante Read-only (Lecture seule), choisissez Source de l'événement.
+Dans la barre de recherche Enter an event source (Saisissez une source d'événement), saisissez kms, puis choisissez kms.amazonaws.com.
+Vous allez ensuite analyser quelques événements CloudTrail clés.
+
+
+<img width="646" height="358" alt="image" src="https://github.com/user-attachments/assets/b06956af-6130-4b6d-9689-fb5004b29437" />
+
+
+<------------------------>
+
+
+Enregistrement d'événement Infos
+Copier
+Vue JSON
+{
+    "eventVersion": "1.11",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA2NCBAL3RPBAGXM7CZ:user4632195=Mamadou__Sy",
+        "arn": "arn:aws:sts::715248393954:assumed-role/voclabs/user4632195=Mamadou__Sy",
+        "accountId": "715248393954",
+        "accessKeyId": "ASIA2NCBAL3RMBTONGYQ",
+        "sessionContext": {
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "AROA2NCBAL3RPBAGXM7CZ",
+                "arn": "arn:aws:iam::715248393954:role/voclabs",
+                "accountId": "715248393954",
+                "userName": "voclabs"
+            },
+            "attributes": {
+                "creationDate": "2026-05-18T04:14:33Z",
+                "mfaAuthenticated": "false"
+            }
+        },
+        "invokedBy": "ec2-frontend-api.amazonaws.com"
+    },
+    "eventTime": "2026-05-18T06:16:58Z",
+    "eventSource": "kms.amazonaws.com",
+    "eventName": "CreateGrant",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "ec2-frontend-api.amazonaws.com",
+    "userAgent": "ec2-frontend-api.amazonaws.com",
+    "requestParameters": {
+        "constraints": {
+            "encryptionContextSubset": {
+                "aws:ebs:id": "vol-0894f908458cca170"
+            }
+        },
+        "retiringPrincipal": "ec2.us-east-1.amazonaws.com",
+        "operations": [
+            "Decrypt"
+        ],
+        "keyId": "arn:aws:kms:us-east-1:715248393954:key/55487ec5-4c6b-4c87-80e5-3cfa8bcfc271",
+        "granteePrincipal": "arn:aws:sts::715248393954:assumed-role/aws:ec2-infrastructure/i-0c9d812c0cfa2790f"
+    },
+    "responseElements": {
+        "grantId": "d0c79b0dd35cdb5284835fd1805d64afea998325a5cad1c6753f67a9d284fe3e",
+        "keyId": "arn:aws:kms:us-east-1:715248393954:key/55487ec5-4c6b-4c87-80e5-3cfa8bcfc271"
+    },
+    "requestID": "b7fb8d8b-49f1-4f89-a200-7962685540ef",
+    "eventID": "ccbed48e-00bd-3ccd-9b2b-b1a04add39f7",
+    "readOnly": false,
+    "resources": [
+        {
+            "accountId": "715248393954",
+            "type": "AWS::KMS::Key",
+            "ARN": "arn:aws:kms:us-east-1:715248393954:key/55487ec5-4c6b-4c87-80e5-3cfa8bcfc271"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "managementEvent": true,
+    "recipientAccountId": "715248393954",
+    "sharedEventID": "7941ede6-b598-4736-a076-5c19101b8670",
+    "vpcEndpointId": "AWS Internal",
+    "vpcEndpointAccountId": "AWS Internal",
+    "eventCategory": "Management",
+    "sessionCredentialFromConsole": "true"
+}
+
+
+<----------------------------->
+
+Analyse : cet événement permet aux principaux AWS d'utiliser des clés AWS KMS dans le cadre d'opérations cryptographiques. L'instance EC2 envoie une requête CreateGrant pour pouvoir déchiffrer la clé de données.
+
+Revenez à la liste Historique des événements et choisissez le lien de l'événement Decrypt. S'il y a plusieurs événements Decrypt, sélectionnez l'un d'eux.
+
+
+<img width="808" height="285" alt="image" src="https://github.com/user-attachments/assets/b129afac-0329-4d63-98f8-b069eabdf0c3" />
+
+
+
+Remarque : si l'événement Decrypt ne s'affiche pas, patientez quelques minutes.
+Dans la section Enregistrement d'événement, passez en revue les détails de l'événement. Les détails ressemblent à l'image suivante. Sur cette image, les détails essentiels de l'enregistrement de l'événement sont surlignés.
+
+Enregistrement d'événement Infos
+Copier
+Vue JSON
+{
+    "eventVersion": "1.11",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "715248393954:aws:ec2-infrastructure:i-0c9d812c0cfa2790f",
+        "arn": "arn:aws:sts::715248393954:assumed-role/aws:ec2-infrastructure/i-0c9d812c0cfa2790f",
+        "accountId": "715248393954",
+        "accessKeyId": "ASIA2NCBAL3RITJGADU7",
+        "sessionContext": {
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "715248393954:aws:ec2-infrastructure",
+                "arn": "arn:aws:iam::715248393954:role/aws:ec2-infrastructure",
+                "accountId": "715248393954",
+                "userName": "aws:ec2-infrastructure"
+            },
+            "attributes": {
+                "creationDate": "2026-05-18T06:16:59Z",
+                "mfaAuthenticated": "false"
+            }
+        },
+        "invokedBy": "AWS Internal",
+        "inScopeOf": {
+            "issuerType": "AWS::EC2::Instance",
+            "credentialsIssuedTo": "arn:aws:ec2:us-east-1:715248393954:instance/i-0c9d812c0cfa2790f"
+        }
+    },
+    "eventTime": "2026-05-18T06:16:59Z",
+    "eventSource": "kms.amazonaws.com",
+    "eventName": "Decrypt",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "AWS Internal",
+    "userAgent": "AWS Internal",
+    "requestParameters": {
+        "encryptionContext": {
+            "aws:ebs:id": "vol-0894f908458cca170"
+        },
+        "encryptionAlgorithm": "SYMMETRIC_DEFAULT"
+    },
+    "responseElements": null,
+    "additionalEventData": {
+        "keyMaterialId": "f9865a6a5bab38dcf11581758310b581a19385034dd450760181fdb7a7f9895e"
+    },
+    "requestID": "b7fb8d8b-49f1-4f89-a200-7962685540ef",
+    "eventID": "910bcc02-9784-4292-ad7f-7a941cc9d8da",
+    "readOnly": true,
+    "resources": [
+        {
+            "accountId": "715248393954",
+            "type": "AWS::KMS::Key",
+            "ARN": "arn:aws:kms:us-east-1:715248393954:key/55487ec5-4c6b-4c87-80e5-3cfa8bcfc271"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "managementEvent": true,
+    "recipientAccountId": "715248393954",
+    "eventCategory": "Management"
+}
+
+
+<------------------------->
+
 
 
 
