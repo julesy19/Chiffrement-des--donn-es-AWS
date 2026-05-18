@@ -33,4 +33,11 @@ Le schéma suivant illustre ces composants :
 <img width="477" height="461" alt="image" src="https://github.com/user-attachments/assets/1127506f-c048-4352-920a-2e67aedd12e4" />
 
 
+Description du schéma : un utilisateur est connecté aux ressources cloud AWS via Internet. Le compartiment S3 nommé ImageBucket contient un objet chiffré côté serveur et des clés gérées par Amazon S3 (SSE-S3). Le volume chiffré est attaché à l'instance EC2 nommée LabInstance. Des demandes de chiffrement ou de déchiffrement des volumes EBS sont envoyées à AWS KMS, où la clé gérée par le client nommée MyKMSKey est stockée. CloudTrail consigne l'utilisation de la clé AWS KMS sous forme d'événements.
+
+
+<img width="641" height="176" alt="image" src="https://github.com/user-attachments/assets/9ddfa6b6-f4c0-4ffa-a75f-acf1f21aac85" />
+
+
+
 
