@@ -535,8 +535,125 @@ Vue JSON
     "eventCategory": "Management"
 }
 
+Analyse : Decrypt fait suite à un événement CreateGrant réussi. L'enregistrement présente les détails de la clé AWS KMS nommée MyKMSKey que l'instance EC2 utilise pour déchiffrer la clé chiffrée, qui est ensuite utilisée pour déchiffrer les données du volume EBS.
 
+  
 <------------------------->
+
+Revenez à la liste Historique des événements, choisissez les liens des événements suivants et observez les détails de ces derniers.
+Pour GenerateDataKeyWithoutPlainText, un événement s'est produit lorsqu'une demande de génération de clé pour chiffrer les données du volume EBS a été envoyée à AWS KMS.
+VOus pouvez également consulter les événements tels que RetireGrant.
+
+
+<img width="501" height="342" alt="image" src="https://github.com/user-attachments/assets/35adf267-16b5-45b4-8d4f-f799a0d7911b" />
+
+
+<------------------------>
+
+
+Enregistrement d'événement Infos
+Copier
+Vue JSON
+{
+    "eventVersion": "1.11",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA2NCBAL3RPBAGXM7CZ:user4632195=Mamadou__Sy",
+        "arn": "arn:aws:sts::715248393954:assumed-role/voclabs/user4632195=Mamadou__Sy",
+        "accountId": "715248393954",
+        "accessKeyId": "ASIA2NCBAL3RJEXXE3LI",
+        "sessionContext": {
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "AROA2NCBAL3RPBAGXM7CZ",
+                "arn": "arn:aws:iam::715248393954:role/voclabs",
+                "accountId": "715248393954",
+                "userName": "voclabs"
+            },
+            "attributes": {
+                "creationDate": "2026-05-18T04:14:33Z",
+                "mfaAuthenticated": "false"
+            }
+        },
+        "invokedBy": "ec2-frontend-api.amazonaws.com"
+    },
+    "eventTime": "2026-05-18T05:25:19Z",
+    "eventSource": "kms.amazonaws.com",
+    "eventName": "GenerateDataKeyWithoutPlaintext",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "ec2-frontend-api.amazonaws.com",
+    "userAgent": "ec2-frontend-api.amazonaws.com",
+    "requestParameters": {
+        "encryptionContext": {
+            "aws:ebs:id": "vol-0894f908458cca170"
+        },
+        "numberOfBytes": 64,
+        "keyId": "arn:aws:kms:us-east-1:715248393954:key/55487ec5-4c6b-4c87-80e5-3cfa8bcfc271"
+    },
+    "responseElements": null,
+    "additionalEventData": {
+        "keyMaterialId": "f9865a6a5bab38dcf11581758310b581a19385034dd450760181fdb7a7f9895e"
+    },
+    "requestID": "328be315-fd9b-42ee-ad12-8b4f4b0ae25b",
+    "eventID": "c5679cb7-5e88-3256-81fa-c86638fdb76c",
+    "readOnly": true,
+    "resources": [
+        {
+            "accountId": "715248393954",
+            "type": "AWS::KMS::Key",
+            "ARN": "arn:aws:kms:us-east-1:715248393954:key/55487ec5-4c6b-4c87-80e5-3cfa8bcfc271"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "managementEvent": true,
+    "recipientAccountId": "715248393954",
+    "sharedEventID": "ffe4c640-83d6-46ed-bb08-3526b3ea6d5d",
+    "vpcEndpointId": "AWS Internal",
+    "vpcEndpointAccountId": "AWS Internal",
+    "eventCategory": "Management",
+    "sessionCredentialFromConsole": "true"
+}
+
+
+
+<img width="841" height="335" alt="image" src="https://github.com/user-attachments/assets/f147d7c0-048e-4c2e-a42f-9b6ca29dc31e" />
+
+
+
+CloudTrail enregistre toutes les activités de l'API AWS KMS. L'analyse de ces entrées du journal peut vous permettre de déterminer l'utilisation passée d'une clé AWS KMS donnée. Si vous souhaitez analyser des événements survenus il y a plus de 90 jours, vous pouvez créer un historique CloudTrail.
+
+
+
+# Tâche 6 : revue de la rotation des clés
+
+Il se peut que vous deviez effectuer une rotation de vos clés KMS en raison de règles commerciales ou contractuelles ou de réglementations gouvernementales. AWS KMS prend en charge la rotation automatique des clés uniquement pour les clés KMS à chiffrement symétrique créées par AWS KMS. La rotation automatique est facultative pour les clés KMS gérées par le client.
+
+Au cours de cette tâche, vous allez passer en revue la fonctionnalité permettant d'activer la rotation automatique de la clé que vous avez créée dans cet atelier. Cependant, vous ne pouvez pas voir la rotation en action, car elle ne sera effective qu'au bout d'un an une fois activée.
+
+
+Dans la console de gestion AWS, choisissez Key Management Service pour ouvrir la console AWS KMS.
+Dans le volet de navigation de gauche, choisissez Clés gérées par le client.
+Dans la liste, choisissez MyKMSKey, la clé que vous avez créée pour cet atelier.
+Choisissez Rotation des clés.
+Dans le menu Rotation des clés, sélectionnez Automatically rotate this KMS key every year (Effectuer une rotation automatique de cette clé KMs chaque année).
+Sélectionnez Enregistrer.
+Le message Rotation des clés mise à jour s'affiche en haut.
+
+<-------------------------->
+
+
+<img width="796" height="301" alt="image" src="https://github.com/user-attachments/assets/acff4d39-7897-4fb7-9572-003cc5e11742" />
+
+
+<-------------------------->
+
+
+
+<img width="813" height="358" alt="image" src="https://github.com/user-attachments/assets/20b4bf5b-2aa8-4af5-9b41-94ecc603802f" />
+
+
+
+
 
 
 
