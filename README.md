@@ -140,6 +140,70 @@ En bas de la page Vérification, choisissez Terminer.
 <----------------------->
 
 
+# Tâche 3 : création et attachement d'un volume de données chiffré à une instance EC2
+
+Au cours de cette tâche, vous allez créer un volume EBS chiffré à l'aide de la clé KMS que vous avez créée lors de la tâche précédente et l'attacher à votre instance EC2. Lorsque vous attachez le volume chiffré, l'instance EC2 extrait la clé de données d'AWS KMS et l'utilise pour déchiffrer les données du volume EBS. Lors des tâches suivantes, vous allez examiner l'historique des événements CloudTrail pour observer les appels passés au service AWS KMS.
+
+Tout d'abord, vous allez observer le volume racine.
+
+<img width="838" height="308" alt="image" src="https://github.com/user-attachments/assets/1838c20d-1d0f-4a48-9490-688688872097" />
+
+
+<------------------------>
+
+
+<img width="830" height="164" alt="image" src="https://github.com/user-attachments/assets/8233e0be-e6a0-40b9-8243-933d4436ffd9" />
+
+<----------------------->
+
+Tâche 4 : désactivation de la clé de chiffrement et observation des effets
+Au cours de cette tâche, vous allez désactiver temporairement la clé AWS KMS que vous avez précédemment utilisée pour chiffrer le volume EBS. Vous allez ensuite observer les effets de la désactivation de la clé sur l'accès aux données chiffrées.
+
+Tout d'abord, vous allez désactiver la clé AWS KMS que vous avez utilisée pour chiffrer le volume EBS.
+
+
+<img width="870" height="346" alt="image" src="https://github.com/user-attachments/assets/a19e43ff-1f60-4245-9384-79f0610800c2" />
+
+
+<---------------------->
+
+
+<img width="814" height="241" alt="image" src="https://github.com/user-attachments/assets/3bcff7ce-a98e-4ac4-bd8f-ed5168b8f39b" />
+
+
+<-------------------->
+Accédez à la console Amazon EC2.
+
+Dans le volet de navigation, sélectionnez Volumes.
+Sélectionnez le lien du volume que vous avez créé.
+Choisissez Actions > Détacher un volume.
+Dans la fenêtre Détacher qui s'affiche, choisissez Détacher.
+
+
+<img width="832" height="226" alt="image" src="https://github.com/user-attachments/assets/7c263cbc-2f9b-4820-9d94-7d65e8ed92b3" />
+
+
+<-------------------->
+
+
+En regard d'Actions, cliquez sur le bouton Actualiser pour actualiser la page.
+Choisissez Actions > Attacher un volume.
+Pour Instance, choisissez votre instance dans la liste déroulante.
+Choisissez Attacher un volume.
+ Un message semblable au suivant s'affiche : Volume vol-072d7cf3173a13151 cannot be attached. The encrypted volume was unable to access the KMS key (Impossible d'attacher le volume vol-072d7cf3173a13151). Le volume chiffré n'a pas pu accéder à la clé KMS).
+
+ 
+<img width="896" height="354" alt="image" src="https://github.com/user-attachments/assets/0e615308-b645-4f4f-bfc8-a3f731852149" />
+
+
+
+
+
+
+
+
+
+
 
 
 
