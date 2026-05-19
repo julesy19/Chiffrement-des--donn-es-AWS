@@ -653,6 +653,16 @@ Le message Rotation des clés mise à jour s'affiche en haut.
 
 
 
+# Conclusion
+
+Félicitations ! Vous avez réussi à effectuer les tâches suivantes :
+passer en revue le chiffrement par défaut fourni par Amazon S3 ;
+accéder à l'objet Amazon S3 chiffré ;
+créer une clé AWS KMS gérée par le client pour chiffrer et déchiffrer des données au repos ;
+créer et attacher un volume de données chiffré à une instance EC2 existante ;
+désactiver et réactiver une clé AWS KMS, et observer les effets sur l'accès aux données ;
+surveiller l'utilisation de la clé de chiffrement à l'aide de l'historique des événements CloudTrail ;
+passer en revue la rotation des clés.
 
 
 
