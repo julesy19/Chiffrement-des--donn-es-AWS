@@ -93,6 +93,15 @@ Au cours de cette tâche, vous avez passé en revue les paramètres de chiffreme
 <img width="517" height="347" alt="image" src="https://github.com/user-attachments/assets/f6238ed9-8e68-45d1-8325-ffb2a9919726" />
 
 
+<--------------------->
+
+<img width="949" height="427" alt="image" src="https://github.com/user-attachments/assets/941ad77e-83d4-48cb-9899-baca1201db6f" />
+
+
+<-------------------->
+
+
+
 
 # Tâche 2 : création d'une clé AWS KMS.
 Au cours de cette tâche, vous allez créer une clé AWS KMS gérée par le client. Plus tard dans l'atelier, vous utiliserez la clé AWS KMS que vous avez créée pour générer, chiffrer et déchiffrer des clés de données. Les clés de données seront partagées avec Amazon EC2. Les clés de données servent à chiffrer des données réelles stockées sur des volumes EBS.
